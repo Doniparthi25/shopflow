@@ -1,15 +1,12 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:userdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/shopflow_users
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Bhuv@n2002
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-
-  h2:
-    console:
-      enabled: true
+    show-sql: true
