@@ -1,5 +1,6 @@
 package com.shopflow.user_service.dto.Request;
 
+import com.shopflow.user_service.validation.StrongPassword;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class CreateUserRequest {
     @Email(message = "Must be a valid email")
     private String email;
 
-    @NotBlank @Size(min = 8, message = "Password must be 8+ chars")
+    @NotBlank
+    @StrongPassword
     private String password;
     
     @NotBlank @Size(max = 100)

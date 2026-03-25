@@ -10,6 +10,7 @@ import com.shopflow.user_service.repository.UserRepository;
 import com.shopflow.user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional  // override: this method writes
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userMapper.toEntity(request);
-        user.setPassword(request.getPassword()); // BCrypt added Day 3
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // BCrypt added Day 3
 
         User saved = userRepository.save(user);
         log.info("User created: {}", saved.getId());
@@ -56,4 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    public boolean verifyPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
 }

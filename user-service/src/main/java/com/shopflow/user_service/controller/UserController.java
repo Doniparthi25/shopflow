@@ -1,6 +1,7 @@
 package com.shopflow.user_service.controller;
 
-import com.shopflow.common.ApiResponse;
+
+import com.shopflow.common.dto.ApiResponse;
 import com.shopflow.user_service.dto.Request.CreateUserRequest;
 import com.shopflow.user_service.dto.Response.UserResponse;
 import com.shopflow.user_service.service.UserService;
